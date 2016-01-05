@@ -39,23 +39,9 @@ class Encrypt
   end
 
   def encrypt(message)
-    i = 0
-    encrypted_arr = []
-    message_to_encrypt = message.downcase
-    while i < message_to_encrypt.length
-      if i % 4 == 0 || i == 0
-        encrypted_arr << encrypt_letter_a(message_to_encrypt[i])
-      elsif i % 4 == 1 || i == 1
-        encrypted_arr << encrypt_letter_b(message_to_encrypt[i])
-      elsif i % 4 == 2 || i == 2
-        encrypted_arr << encrypt_letter_c(message_to_encrypt[i])
-      elsif i % 4 == 3 || i == 3
-        encrypted_arr << encrypt_letter_d(message_to_encrypt[i])
-      end
-      i += 1
-      encrypted_input = encrypted_arr.join
-    end
-    encrypted_input
+    message.chars.each_slice(4).map { |chunk|
+      ChunkRotator.new(chunk, rotations).rotate
+    }.join
   end
 
   def print_message
