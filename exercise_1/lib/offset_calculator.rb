@@ -21,7 +21,7 @@ class OffsetCalculator
   end
 
   def get_key
-    OffsetGenerator.new.generate_key
+    KeyGenerator.new.generate_key
   end
 
   def get_offset
